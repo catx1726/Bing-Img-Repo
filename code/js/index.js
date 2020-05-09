@@ -54,7 +54,7 @@ function checkUpdate() {
     return false
 }
 // 十分钟检测一次 BING 是否更新了图片
-setInterval('checkUpdate()', 1000)
+setInterval('checkUpdate()', 10 * 60 * 1000)
 
 // 2. 保存原始图片到GitHub
 // function beforeDown() {
