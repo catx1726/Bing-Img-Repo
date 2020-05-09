@@ -3,7 +3,7 @@ function imgLoad() {
     //'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', // 此接口需要用 nginx处理跨域请求
     // 备用 'https://api.berryapi.net/?service=App.Bing.Images'
     let img = fetch(
-        'http://bing.adoba.site:82/proxy/bing/HPImageArchive.aspx?format=js&idx=0&n=1'
+        'https://bing.adoba.site:82/proxy/bing/HPImageArchive.aspx?format=js&idx=0&n=1'
     ).then((res) => {
         console.log(res)
     })
