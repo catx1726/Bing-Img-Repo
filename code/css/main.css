@@ -1,0 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.container {
+    height: 100vh;
+    max-width: 100vw;
+    position: relative;
+    color: #a49f9f;
+    font-family: consolas;
+    background-color: black;
+}
+.img-container,
+.slide-container {
+    top: 5vh;
+    height: 80vh;
+    max-height: 80vh;
+    /* max-width: 100vw; */
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.slide-container {
+    overflow: visible;
+}
+.img-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.img-else-container {
+    max-height: 10vh;
+    overflow: hidden;
+    bottom: 5vh;
+    width: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+.img-else-container:hover {
+    max-height: 50vh;
+}
+.img-name {
+    font-size: 30px;
+    color: white;
+}
+.img-nums {
+    /* width: 100px; */
+    right: 0;
+    font-size: 20px;
+    position: absolute;
+}
+
+/* @media screen and(max-width:400px) {
+    .img-else-container {
+        width: 100vw;
+    }
+} */
+
+.prev,
+.next {
+    top: 50%;
+    opacity: 0.1;
+    color: white;
+    font-weight: 100;
+    font-size: 10vh;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    transition: all 0.3s ease;
+    transform: translateY(-50%);
+}
+.prev:hover,
+.next:hover {
+    opacity: 1;
+}
+.prev {
+    left: 10px;
+}
+.next {
+    right: 10px;
+}

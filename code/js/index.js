@@ -81,3 +81,26 @@ setInterval('checkUpdate()', 10 * 60 * 1000)
 // 3. 调用放大图片接口
 // 3.1 保存放大图片到GitHub
 // 4. 24H循环整个流程(附带检测如果有重名的就不放大，也不保存)
+
+// 获取到一周的图片
+let imgs = DOC.querySelectorAll('.img-item'),
+    slideContainer = DOC.querySelector('.slide-container'),
+    prev = DOC.querySelector('.prev'),
+    next = DOC.querySelector('.next'),
+    imgLen = imgs.length,
+    nowNum = 0
+
+next.addEventListener('click', nextImg, false)
+prev.addEventListener('click', prevImg, false)
+
+function nextImg() {
+    console.log(nowNum < imgLen - 1 ? nowNum++ : false)
+    let temp = -100 * nowNum + 'vw'
+    slideContainer.style.transform = `translateX(${temp})`
+}
+function prevImg() {
+    console.log(nowNum ? nowNum-- : false)
+    let temp = -100 * nowNum + 'vw'
+    slideContainer.style.transform = `translateX(${temp})`
+}
+console.log('imgs:', imgs)
