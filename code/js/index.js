@@ -87,20 +87,37 @@ let imgs = DOC.querySelectorAll('.img-item'),
     slideContainer = DOC.querySelector('.slide-container'),
     prev = DOC.querySelector('.prev'),
     next = DOC.querySelector('.next'),
+    imgDes = DOC.querySelector('.img-else-container'),
     imgLen = imgs.length,
-    nowNum = 0
+    nowNum = 0,
+    imgClick = false
 
 next.addEventListener('click', nextImg, false)
 prev.addEventListener('click', prevImg, false)
+slideContainer.addEventListener('click', showDetail, false)
 
+// 单时隐藏 字体 和 trigger
+function showDetail() {
+    imgClick = !imgClick
+    // 隐藏
+    if (imgClick) {
+        prev.style.opacity = '0'
+        next.style.opacity = '0'
+        imgDes.style.opacity = '0'
+    } else {
+        // 显示
+        prev.style.opacity = '.1'
+        next.style.opacity = '.1'
+        imgDes.style.opacity = '1'
+    }
+}
 function nextImg() {
-    console.log(nowNum < imgLen - 1 ? nowNum++ : false)
+    nowNum < imgLen - 1 ? nowNum++ : false
     let temp = -100 * nowNum + 'vw'
     slideContainer.style.transform = `translateX(${temp})`
 }
 function prevImg() {
-    console.log(nowNum ? nowNum-- : false)
+    nowNum ? nowNum-- : false
     let temp = -100 * nowNum + 'vw'
     slideContainer.style.transform = `translateX(${temp})`
 }
-console.log('imgs:', imgs)
