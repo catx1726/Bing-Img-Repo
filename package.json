@@ -1,0 +1,24 @@
+{
+  "name": "Bing",
+  "version": "1.0.0",
+  "description": "> ![img](https://github.com/catx1726/Bing-Img-Repo/blob/master/imgs/2020-05-09_10-06.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catx1726/Bing-Img-Repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catx1726/Bing-Img-Repo/issues"
+  },
+  "homepage": "https://github.com/catx1726/Bing-Img-Repo#readme",
+  "dependencies": {
+    "node-schedule": "^1.3.2",
+    "request": "^2.88.2"
+  }
+}

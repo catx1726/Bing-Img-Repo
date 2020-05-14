@@ -5,6 +5,8 @@
     3. 创建 express服务 响应用户请求，返回一周图片列表
 */
 
+/* request 组件已经不在维护，可考虑使用 axios 或者 浏览器原生的fetch  */
+
 const request = require('request')
 const fs = require('fs')
 const path = require('path')
