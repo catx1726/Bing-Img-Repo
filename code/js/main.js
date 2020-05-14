@@ -19,17 +19,14 @@ const getImg = () => {
         (err, res, body) => {
             const img = JSON.parse(body).images[0],
                 url = img.url,
-                name = img.copyright,
+                name = img.urlbase.split('=')[1],
                 year = img.enddate.slice(0, 4),
                 month = img.enddate.slice(4, 6)
 
             request(`http://cn.bing.com${url}`).pipe(
                 fs
                     .createWriteStream(
-                        path.join(
-                            `./imgs/bing/${year}/${month}/`,
-                            name + '.jpg'
-                        )
+                        path.join(`./imgs/bing/${year}/${month}`, name + '.jpg')
                     )
                     .on('close', () => {
                         console.log(`${name} done !`)
@@ -43,12 +40,14 @@ const getImg = () => {
 // 导出后，24H检测一次Bing是否更新壁纸
 module.exports = getImg
 
-getImg()
+// 测试执行
+// getImg()
 
 /* 定时任务 */
 const schedule = require('node-schedule')
 // const getImg = require('./main')
 
+// 每天早上 8:00 执行
 const rule = new schedule.RecurrenceRule()
 rule.dayOfWeek = [0, new schedule.Range(1, 6)]
 rule.hour = 8
