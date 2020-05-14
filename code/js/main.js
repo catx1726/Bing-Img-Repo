@@ -13,6 +13,7 @@ const path = require('path')
 const github = require('./github')
 
 const getImg = () => {
+    console.log('getImg start.')
     request.get(
         'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',
         (err, res, body) => {
@@ -25,7 +26,10 @@ const getImg = () => {
             request(`http://cn.bing.com${url}`).pipe(
                 fs
                     .createWriteStream(
-                        path.join(`../../imgs/bing/${year}/${month}`, name)
+                        path.join(
+                            `./imgs/bing/${year}/${month}/`,
+                            name + '.jpg'
+                        )
                     )
                     .on('close', () => {
                         console.log(`${name} done !`)
@@ -38,6 +42,8 @@ const getImg = () => {
 
 // 导出后，24H检测一次Bing是否更新壁纸
 module.exports = getImg
+
+getImg()
 
 /* 定时任务 */
 const schedule = require('node-schedule')
