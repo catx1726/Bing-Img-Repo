@@ -23,7 +23,7 @@ const getImg = () => {
             request(`http://cn.bing.com${url}`).pipe(
                 fs
                     .createWriteStream(
-                        path.join(`./imgs/bing/${year}/${month}`, name)
+                        path.join(`../imgs/bing/${year}/${month}`, name)
                     )
                     .on('close', () => {
                         console.log(`${name} done !`)
