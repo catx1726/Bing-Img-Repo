@@ -30,6 +30,7 @@ const github = () => {
     console.log('Depoly start.')
     exec(cmd('git status'))
         .then((stdout, stderr) => console.log(stdout, stderr))
+        .then(() => exec(cmd('git pull origin master')))
         .then(() => exec(cmd('git add .')))
         .then(() =>
             exec(
