@@ -26,7 +26,11 @@ const getImg = () => {
             request(`http://cn.bing.com${url}`).pipe(
                 fs
                     .createWriteStream(
-                        path.join(`./imgs/bing/${year}/${month}`, name + '.jpg')
+                        path.join(
+                            __filename,
+                            `./imgs/bing/${year}/${month}`,
+                            name + '.jpg'
+                        )
                     )
                     .on('close', () => {
                         console.log(`${name} done !`)
@@ -41,7 +45,7 @@ const getImg = () => {
 module.exports = getImg
 
 // 测试执行
-// getImg()
+getImg()
 
 /* 定时任务 */
 const schedule = require('node-schedule')
