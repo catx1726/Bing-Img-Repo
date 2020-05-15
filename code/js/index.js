@@ -95,6 +95,7 @@ function nextImg() {
     let temp = -100 * nowNum + 'vw'
     slideContainer.style.transform = `translateX(${temp})`
 }
+
 function prevImg() {
     nowNum ? nowNum-- : false
     download(nowNum)
