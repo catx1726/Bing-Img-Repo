@@ -1,7 +1,17 @@
 const express = require('express')
-const fs = require('fs')
 const app = express()
+const fs = require('fs')
 const port = '8088'
+const https = require('https')
+const http = require('http')
+
+var httpsServer = https.createServer(
+    {
+        key: fs.readFileSync('./cert/privatekey.pem'),
+        cert: fs.readFileSync('./cert/certificate.crt'),
+    },
+    app
+)
 
 app.get('/public/bing/:year/:month/', (req, res) => {
     // DES 这个请求应该接受 年月的参数，然后去响应文件夹下获取所有jpg文件，返回一个url数组
@@ -19,6 +29,6 @@ app.get('/public/bing/:year/:month/', (req, res) => {
     }
 })
 
-const server = app.listen(port, () => {
-    console.log(`server running at http://127.0.0.1:${port}`)
+httpsServer.listen(port, () => {
+    console.log(`https server running at https://127.0.0.1:${port}`)
 })
