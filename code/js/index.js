@@ -5,6 +5,9 @@ const _d = new Date()
 let nowYear = _d.getFullYear(),
     nowMonth = _d.getMonth() + 1
 
+// 传递格式 https://test.dev.adoba.site/public/bing/2020/05/
+nowMonth = nowMonth < 9 ? '0' + nowMonth : nowMonth
+
 // 存储当天图片的时间 如 20200509
 let imgDay = 0,
     imgMonth = 0,
@@ -15,9 +18,14 @@ let pureImgSrc = ''
 // 1. 获取到一周的图片
 function imgLoad() {
     let urlList = []
-    fetch(
-        `http:test.dev.adoba.site:81/public/${nowYear}/${nowMonth}/`
-    ).then((res) => console.log(res))
+    fetch(`https://test.dev.adoba.site/public/bing/${nowYear}/${nowMonth}/`)
+        .then((res) => {
+            console.log('原始数据：', res)
+            return res.json()
+        })
+        .then((resJson) => {
+            console.log('json 序列化后的数据：', resJson)
+        })
 
     // ~~ 1. 获取到 BING 的日推图片 ~~
     //'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', // 此接口需要用 nginx处理跨域请求
