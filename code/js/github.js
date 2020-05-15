@@ -36,7 +36,7 @@ const github = () => {
                 cmd(`git commit -m '${year + '年' + month + '月,Bing壁纸更新'}'`)
             )
         )
-        .then(() => exec(cmd('git push -u origin master')))
+        .then(() => exec(cmd('git push origin master')))
         .then(() => exec(cmd('Depoly done.')))
         .catch((err) => {
             console.log(err)
