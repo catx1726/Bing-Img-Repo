@@ -28,12 +28,12 @@ const exec = (c) => {
 
 const github = () => {
     console.log('Depoly start.')
-    exec(cmd('cd .. && cd .. && git status'))
+    exec(cmd('git status'))
         .then((stdout, stderr) => console.log(stdout, stderr))
         .then(() => exec(cmd('git add .')))
         .then(() =>
             exec(
-                cmd(`git commit -m '${year + '年' + month + '月,Bing壁纸更新'}`)
+                cmd(`git commit -m '${year + '年' + month + '月,Bing壁纸更新'}'`)
             )
         )
         .then(() => exec(cmd('git push -u origin master')))
