@@ -7,8 +7,8 @@ const http = require('http')
 
 var httpsServer = https.createServer(
     {
-        key: fs.readFileSync('./cert/privatekey.pem'),
-        cert: fs.readFileSync('./cert/certificate.crt'),
+        key: fs.readFileSync('./cert/privatekey.pem', 'utf8'),
+        cert: fs.readFileSync('./cert/certificate.crt', 'utf8'),
     },
     app
 )
