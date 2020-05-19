@@ -44,8 +44,8 @@ const getImg = () => {
                             lock: false,
                             tid: '',
                         }
-                        // TODO 本地测试时，暂时关闭
-                        // github()
+                        // TODO 本地测试时，将其关闭
+                        github()
                     })
             )
         }
@@ -78,11 +78,12 @@ const BigImgAPI = require('./code/js/translate')
 function check4KImg() {
     // 可以上传为4K，且普通素质的图片已经下载完，且没有在处理中
     if (todayImg.status && !todayImg.lock) {
-        BigImgAPI.upload(todayImg)
+        // BigImgAPI.upload(todayImg)
+        console.log('上传4k接口')
         return true
     }
     if (todayImg.lock && todayImg.tid) {
-        console.log('提交接口')
+        console.log('下载4k接口')
     }
 }
 
