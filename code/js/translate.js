@@ -7,6 +7,7 @@
 */
 
 const request = require('request')
+const github = require('./github')
 
 let bigJpgApi = {
     upload,
@@ -39,6 +40,21 @@ function upload(imgObj) {
 
 function download(imgObj) {
     // 通过 imgObj.tid 查询状态，true 就保存到服务器，然后调用 GitHub.js
+    request(imgObj.reqUrl).pipe(
+        fs
+            .createWriteStream(
+                path.join(
+                    __dirname,
+                    `./imgs/bing/${year}/${month}/4k`,
+                    imgObj.name + '.jpg'
+                )
+            )
+            .on('close', () => {
+                console.log(`${imgObj.name} done !`)
+                // TODO 本地测试时，将其关闭
+                // github()
+            })
+    )
     console.log('down test')
 }
 
