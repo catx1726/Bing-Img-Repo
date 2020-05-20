@@ -19,6 +19,9 @@ function upload(imgObj) {
         style: 'photo',
         noise: '1',
         x2: '2',
+        size: '',
+        width: '',
+        height: '',
         input: imgObj.reqUrl,
     }
     imgObj.lock = true
