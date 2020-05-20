@@ -86,9 +86,7 @@ function showDetail() {
 }
 
 function download(idx) {
-    let temp4K = imgSrcList[idx]
-    // idx = temp4K.lastIndexOf('.jpg'),
-    // real4K = temp4K.slice(0,idx)
+    let temp4K = imgSrcList[idx].split('=')[1]
     downloadBtn.href = `https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/4k/${temp4K}`
 }
 

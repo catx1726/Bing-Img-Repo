@@ -47,7 +47,7 @@ const getImg = () => {
                             month,
                         }
                         // TODO 本地测试时，将其关闭
-                        // github()
+                        github()
                     })
             )
         }
@@ -78,6 +78,7 @@ schedule.scheduleJob(rule, () => {
 const BigImgAPI = require('./code/js/translate')
 
 function check4KImg() {
+    // TODO 2020年5月20日 这里可以写成 Promise 、async / await 形式
     // 可以上传为4K，且普通素质的图片已经下载完，且没有在处理中
     if (todayImg.status && !todayImg.lock) {
         BigImgAPI.upload(todayImg)
@@ -89,6 +90,8 @@ function check4KImg() {
         console.log('下载4k接口')
         return true
     }
+    console.log('...等普通图片或者也可能是卡住了')
+    return false
 }
 
 setInterval(check4KImg, 1000)

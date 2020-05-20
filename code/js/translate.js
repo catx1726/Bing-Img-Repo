@@ -55,11 +55,10 @@ function download(imgObj) {
             .on('close', () => {
                 console.log(`${imgObj.name} done !`)
                 // TODO 本地测试时，将其关闭
-                // github()
+                github()
             })
     )
     console.log('down test')
 }
 
-console.log('bigJpgApiList:', bigJpgApi)
 module.exports = bigJpgApi
