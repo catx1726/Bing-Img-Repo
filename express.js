@@ -47,6 +47,18 @@ app.get('/public/bing/:year/:month/4k/:name', (req, res) => {
     }
 })
 
+// 此接口只返回名字和链接
+app.get('/public/white-noise/all', (req, res) => {
+    try {
+        let list = fs.readdirSync(`../white-noise/source/`)
+        res.send({ list, status: true, message: '获取成功' })
+        console.log(`Request for ${req.url} received.`)
+    } catch (error) {
+        console.error(error)
+        res.send('不好意思,出错了')
+    }
+})
+
 httpsServer.listen(port, () => {
     console.log(`https server running at https://127.0.0.1:${port}`)
 })
