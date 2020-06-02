@@ -13,18 +13,39 @@ const path = require('path')
 const github = require('./code/js/github')
 let todayImg = {}
 
+// 检测日期是否为 1号，然后创建目录 /bing/year/month
+const createMkdir = (path, year, month, date) => {
+    console.log(`今天 ${year}年${month}月${date} 号！`)
+    if (date !== 1) {
+        return false
+    }
+    fs.mkdir(
+        `${__dirname}/${path}/${year}/${month}`,
+        { recursive: true },
+        (err) => {
+            if (err) {
+                throw err
+                console.error(err)
+            }
+        }
+    )
+    return true
+}
+
 const getImg = () => {
     console.log('getImg start.')
     request.get(
         'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',
         (err, res, body) => {
-            const img = JSON.parse(body).images[0],
+            const _d = new Date(),
+                img = JSON.parse(body).images[0],
                 url = img.url,
                 name = img.urlbase.split('=')[1],
                 year = img.enddate.slice(0, 4),
                 month = img.enddate.slice(4, 6),
+                date = _d.getDate(),
                 reqUrl = 'http://cn.bing.com' + url
-
+            createMkdir('imgs/bing', year, month, date)
             request(reqUrl).pipe(
                 fs
                     .createWriteStream(
@@ -59,6 +80,7 @@ module.exports = getImg
 
 // 测试执行
 getImg()
+// createMkdir('imgs/bing', '2020', '06', 1)
 
 /* 定时任务 */
 const schedule = require('node-schedule')
