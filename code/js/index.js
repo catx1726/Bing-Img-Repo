@@ -3,11 +3,11 @@ const _d = new Date()
 
 // 基本交互的一些数据
 let imgs = '',
-    slideContainer = DOC.querySelector('.slide-container'),
+    slideContainer = DOC.querySelector('.slide_container'),
     prev = DOC.querySelector('.prev'),
     next = DOC.querySelector('.next'),
-    downloadBtn = DOC.querySelector('.down-button'),
-    downTrigger = DOC.querySelector('.down-trigger'),
+    downloadBtn = DOC.querySelector('.button-down'),
+    downTrigger = DOC.querySelector('.trigger-down'),
     // imgDes = DOC.querySelector('.img-else-container'),
     imgLen = 0, // imgs 总数量
     nowNum = 0, // 当前第几张
@@ -87,7 +87,7 @@ function showDetail() {
 
 function download(idx) {
     let temp4K = imgSrcList[idx].split('=')[1]
-    downloadBtn.href = `https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/4k/${temp4K}`
+    // downloadBtn.href = `https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/4k/${temp4K}`
 }
 
 function nextImg() {

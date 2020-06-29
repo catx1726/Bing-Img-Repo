@@ -1,0 +1,12 @@
+.mini_container {
+    height: 10vh;
+    padding: 0vh 5vw;
+    width: 90vw;
+    position: relative;
+    overflow: hidden;
+}
+.mini_item {
+    width: 10%;
+    padding-right: 5px;
+    object-fit: contain;
+}
