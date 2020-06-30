@@ -1,72 +1,94 @@
-const DOC = document
-const _d = new Date()
+const DOC = document,
+  _d = new Date()
+
+let createDomSendObj = { classList: [], parentBox: {}, attrName: [], valueList: [], domType: [{}] }
 
 // 基本交互的一些数据
 let imgs = '',
-    slideContainer = DOC.querySelector('.slide_container'),
-    prev = DOC.querySelector('.prev'),
-    next = DOC.querySelector('.next'),
-    downloadBtn = DOC.querySelector('.button-down'),
-    downTrigger = DOC.querySelector('.trigger-down'),
-    // imgDes = DOC.querySelector('.img-else-container'),
-    imgLen = 0, // imgs 总数量
-    nowNum = 0, // 当前第几张
-    imgClick = false
+  imgContainer = DOC.querySelector('.img_container'),
+  slideContainer = DOC.querySelector('.slide_container'),
+  prev = DOC.querySelector('.prev'),
+  next = DOC.querySelector('.next'),
+  downloadBtn = DOC.querySelector('.button-down'),
+  downTrigger = DOC.querySelector('.trigger-down'),
+  miniContainer = DOC.querySelector('.mini_container'),
+  imgLen = 0, // imgs 总数量
+  nowNum = 0, // 当前第几张
+  imgClick = false,
+  pastNum = 0 // 存储之前那张的IDX
 
 // 获取当前 year / month 用于请求使用
 let nowYear = _d.getFullYear(),
-    nowMonth = _d.getMonth() + 1
+  nowMonth = _d.getMonth() + 1
 
 // 传递格式 https://test.dev.adoba.site/public/bing/2020/05/
 nowMonth = nowMonth < 9 ? '0' + nowMonth : nowMonth
 
 // 存储当天图片的时间 如 20200509
 let imgDay = 0,
-    imgMonth = 0,
-    imgYear = 0
+  imgMonth = 0,
+  imgYear = 0
 
 // 请求返回的地址数组: OHR.NorthRimOpens_ZH-CN9513300299.jpg
 // https://cn.bing.com/th?id=OHR.NorthRimOpens_ZH-CN9513300299_1920x1080.jpg
 let fetchTemp = 'https://cn.bing.com/th?id=',
-    size = '_1920x1080.jpg'
+  size = '_1920x1080.jpg'
 
 // 标准 src 数组
 let imgSrcList = []
 
 // 1. 获取到一周的图片
 function imgLoad() {
-    let urlList = []
-    fetch(`https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/`)
-        .then((res) => {
-            // console.log('原始数据：', res)
-            return res.json()
-        })
-        .then((resJson) => {
-            resJson.forEach((i) => {
-                let idx = i.lastIndexOf('.jpg')
-                imgSrcList.push(fetchTemp + i.slice(0, idx) + size)
-            })
-            console.log('符合 bing 请求的地址:', imgSrcList)
-        })
-        .then(() => {
-            createImg()
-            download(0)
-        })
+  let urlList = []
+  fetch(`https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/`)
+    .then((res) => {
+      // console.log('原始数据：', res)
+      return res.json()
+    })
+    .then((resJson) => {
+      resJson.forEach((i) => {
+        let idx = i.lastIndexOf('.jpg')
+        imgSrcList.push(fetchTemp + i.slice(0, idx) + size)
+      })
+      console.log('符合 bing 请求的地址:', imgSrcList)
+    })
+    .then(() => {
+      createDomSendObj = {
+        domType: 'img',
+        valueList: imgSrcList,
+        attrName: ['src']
+      }
+      createDom(createDomSendObj, slideContainer, 'img-item')
+      createDom(createDomSendObj, miniContainer, 'mini_item')
+      miniItemClickReg(miniContainer)
+      download(0)
+    })
 }
 imgLoad()
 
-// 2. 创建 img 元素
-function createImg() {
-    const fragment = DOC.createDocumentFragment()
-    imgSrcList.forEach((i) => {
-        const img = DOC.createElement('img')
-        img.src = i
-        img.classList = 'img-item'
-        fragment.appendChild(img)
+/**
+ *
+ * @des 生成DOM元素
+ * @param {Object} obj{domType:'',valueList:[],attrName:[]}
+ * @param {Object} parentBox
+ * @param {String} mClass
+ *
+ */
+function createDom(obj, parentBox, mClass) {
+  const fragment = DOC.createDocumentFragment()
+  let { domType, valueList, attrName } = obj
+
+  valueList.forEach((i) => {
+    const img = DOC.createElement(domType)
+    attrName.forEach((myAttr) => {
+      img[myAttr] = i
     })
-    slideContainer.appendChild(fragment)
-    imgs = DOC.querySelectorAll('.img-item')
-    imgLen = imgs.length
+    img.classList = mClass
+    fragment.appendChild(img)
+  })
+  parentBox.appendChild(fragment)
+  imgs = DOC.querySelectorAll('.img-item')
+  imgLen = imgs.length
 }
 
 next.addEventListener('click', nextImg, false)
@@ -75,31 +97,65 @@ slideContainer.addEventListener('click', showDetail, false)
 
 // 单时隐藏 字体 和 trigger
 function showDetail() {
-    imgClick = !imgClick
-    // 隐藏
-    if (imgClick) {
-        downTrigger.style.opacity = '0'
-    } else {
-        // 显示
-        downTrigger.style.opacity = '1'
-    }
+  imgClick = !imgClick
+  // 隐藏
+  if (imgClick) {
+    downTrigger.style.opacity = '0'
+    miniContainer.style.opacity = '0'
+    imgContainer.style.top = '5vh'
+  } else {
+    // 显示
+    downTrigger.style.opacity = '1'
+    miniContainer.style.opacity = '1'
+    imgContainer.style.top = '0'
+  }
 }
 
 function download(idx) {
-    let temp4K = imgSrcList[idx].split('=')[1]
-    // downloadBtn.href = `https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/4k/${temp4K}`
+  let temp4K = imgSrcList[idx].split('=')[1]
+  // downloadBtn.href = `https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/4k/${temp4K}`
 }
 
 function nextImg() {
-    nowNum < imgLen - 1 ? nowNum++ : false
-    download(nowNum)
-    let temp = -100 * nowNum + 'vw'
-    slideContainer.style.transform = `translateX(${temp})`
+  pastNum = nowNum
+  nowNum < imgLen - 1 ? nowNum++ : false
+  download(nowNum)
+  let temp = -100 * nowNum + 'vw'
+  slideContainer.style.transform = `translateX(${temp})`
 }
 
 function prevImg() {
-    nowNum ? nowNum-- : false
-    download(nowNum)
-    let temp = -100 * nowNum + 'vw'
-    slideContainer.style.transform = `translateX(${temp})`
+  pastNum = nowNum
+  nowNum ? nowNum-- : false
+  download(nowNum)
+  let temp = -100 * nowNum + 'vw'
+  slideContainer.style.transform = `translateX(${temp})`
+}
+
+// mini_item 事件绑定
+/**
+ *
+ * @des 给所有 mini_item 添加监听
+ * @param {Object} domContainer
+ */
+function miniItemClickReg(domContainer) {
+  let miniItems = [...domContainer.children]
+  miniItems.forEach((i) => {
+    i.addEventListener('click', () => {
+      miniItemClick(i.src)
+    })
+  })
+}
+
+// click mini item 时获取到 IDX 赋值给 nowNum
+function miniItemClick(value) {
+  let idx = imgSrcList.indexOf(value)
+  nowNum = idx
+  pastNum = nowNum
+  if (pastNum >= nowNum) {
+    prevImg()
+  } else {
+    nextImg()
+  }
+  console.log(nowNum)
 }

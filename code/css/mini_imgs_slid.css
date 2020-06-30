@@ -1,12 +1,23 @@
 .mini_container {
-    height: 10vh;
-    padding: 0vh 5vw;
-    width: 90vw;
-    position: relative;
-    overflow: hidden;
+  height: 10vh;
+  /* padding: 0vh 5vw; */
+  width: 90vw;
+  left: 50%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
 }
 .mini_item {
-    width: 10%;
-    padding-right: 5px;
-    object-fit: contain;
+  width: 10%;
+  height: 100%;
+  opacity: 0.8;
+  padding-right: 5px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.mini_item:hover {
+  opacity: 1;
 }

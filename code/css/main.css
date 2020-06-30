@@ -3,75 +3,76 @@
 @import '../css/flex_layout.css';
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .main_container {
-    height: 100vh;
-    max-width: 100vw;
-    position: relative;
-    color: #a49f9f;
-    font-family: consolas;
-    background-color: black;
+  height: 100vh;
+  max-width: 100vw;
+  position: relative;
+  color: #a49f9f;
+  font-family: consolas;
+  background-color: black;
 }
 .img_container,
 .slide_container {
-    /* top: 5vh; */
-    height: 90vh;
-    max-height: 90vh;
-    /* max-width: 100vw; */
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: all 0.3s ease;
+  top: 0vh;
+  height: 90vh;
+  max-height: 90vh;
+  /* max-width: 100vw; */
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 10;
+  transition: all 0.3s ease;
 }
 .slide_container {
-    top: 0;
-    overflow: visible;
+  top: 0;
+  overflow: visible;
 }
 .img_container img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    transition: all 0.3s ease;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
 }
 
 .img-else-container {
-    max-height: 10vh;
-    overflow: hidden;
-    bottom: 5vh;
-    width: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translateX(-50%);
-    transition: all 0.3s ease;
+  max-height: 10vh;
+  overflow: hidden;
+  bottom: 5vh;
+  width: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
 }
 .img-else-container:hover {
-    max-height: 50vh;
+  max-height: 50vh;
 }
 .img-name,
 .img-down {
-    font-size: 30px;
-    line-height: 30px;
+  font-size: 30px;
+  line-height: 30px;
 }
 .img-name {
-    color: white;
+  color: white;
 }
 .img-down {
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
 }
 .img-nums {
-    /* width: 100px; */
-    right: 0;
-    font-size: 20px;
-    line-height: 30px;
-    position: absolute;
+  /* width: 100px; */
+  right: 0;
+  font-size: 20px;
+  line-height: 30px;
+  position: absolute;
 }
 
 /* @media screen and(max-width:400px) {
@@ -81,46 +82,47 @@ a {
 } */
 
 .trigger-down {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .prev,
 .next {
-    top: 50%;
-    opacity: 0.1;
-    color: white;
-    font-weight: 100;
-    font-size: 10vh;
-    cursor: pointer;
-    user-select: none;
-    position: absolute;
-    transition: all 0.3s ease;
-    transform: translateY(-50%);
+  z-index: 20;
+  top: 50%;
+  opacity: 0.1;
+  color: white;
+  font-weight: 100;
+  font-size: 10vh;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  transition: all 0.3s ease;
+  transform: translateY(-50%);
 }
 .prev:hover,
 .next:hover {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 .prev {
-    left: 10px;
+  left: 10px;
 }
 .next {
-    right: 10px;
+  right: 10px;
 }
 .button-down {
-    bottom: 0;
-    left: 50%;
-    position: absolute;
-    cursor: pointer;
-    display: block;
-    color: black;
-    font-size: 20px;
-    opacity: 0.6;
-    filter: blur(1px);
-    transform: translateX(-50%);
-    background-color: white;
-    transition: all 0.3s ease;
+  bottom: 0;
+  left: 50%;
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  color: black;
+  font-size: 20px;
+  opacity: 0.6;
+  filter: blur(1px);
+  transform: translateX(-50%);
+  background-color: white;
+  transition: all 0.3s ease;
 }
 .button-down:hover {
-    opacity: 1;
-    filter: blur(0px);
+  opacity: 1;
+  filter: blur(0px);
 }
