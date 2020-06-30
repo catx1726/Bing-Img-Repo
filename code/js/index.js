@@ -117,16 +117,18 @@ function download(idx) {
 }
 
 function nextImg() {
+  let check = nowNum < imgLen - 1 ? nowNum++ : false
+  if (!check) return false
   pastNum = nowNum
-  nowNum < imgLen - 1 ? nowNum++ : false
   download(nowNum)
   let temp = -100 * nowNum + 'vw'
   slideContainer.style.transform = `translateX(${temp})`
 }
 
 function prevImg() {
+  let check = nowNum ? nowNum-- : false
+  if (!check) return false
   pastNum = nowNum
-  nowNum ? nowNum-- : false
   download(nowNum)
   let temp = -100 * nowNum + 'vw'
   slideContainer.style.transform = `translateX(${temp})`
@@ -151,11 +153,7 @@ function miniItemClickReg(domContainer) {
 function miniItemClick(value) {
   let idx = imgSrcList.indexOf(value)
   nowNum = idx
-  pastNum = nowNum
-  if (pastNum >= nowNum) {
-    prevImg()
-  } else {
-    nextImg()
-  }
   console.log(nowNum)
+  prevImg() ? prevImg() : nextImg()
+  // console.log('nowNum :', nowNum, 'pastNum:', pastNum)
 }
