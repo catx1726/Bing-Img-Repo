@@ -131,10 +131,10 @@ function prevImg() {
 function slidTrigger() {
   console.log('slideTrigger numNum:', nowNum)
   let temp = -100 * nowNum + 'vw',
-    miniTemp = -10 * nowNum - 30 + '%'
+    miniTemp = -10 * nowNum - 10 + '%'
   slideContainer.style.transform = `translateX(${temp})`
   miniSlideContainer.style.transform = `translateX(${miniTemp})`
-  if (nowNum < 3) {
+  if (nowNum < 5) {
     miniSlideContainer.style.transform = `translateX(-50%)`
   }
 }
