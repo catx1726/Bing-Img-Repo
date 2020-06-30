@@ -88,10 +88,10 @@ a {
 .next {
   z-index: 20;
   top: 50%;
-  opacity: 0.1;
+  /* opacity: 0.1; */
   color: white;
   font-weight: 100;
-  font-size: 10vh;
+  font-size: 5vw;
   cursor: pointer;
   user-select: none;
   position: absolute;

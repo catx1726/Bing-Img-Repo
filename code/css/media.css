@@ -1,0 +1,32 @@
+@media screen and (min-width: 300px) {
+  .mini_item {
+    width: 10%;
+  }
+  .prev,
+  .next {
+    opacity: 0.6;
+  }
+}
+
+/* 600 - 960 */
+@media screen and (min-width: 600px) {
+}
+
+/* 960 - 1264 */
+@media screen and (min-width: 960px) {
+  .mini_item {
+    width: 10%;
+  }
+  .prev,
+  .next {
+    opacity: 0.1;
+  }
+}
+
+/* 1264 - 1900 */
+@media screen and (min-width: 1264px) {
+}
+
+/* 1900 - xxxl */
+@media screen and (min-width: 1900px) {
+}

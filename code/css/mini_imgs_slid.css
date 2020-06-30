@@ -1,4 +1,6 @@
-.mini_container {
+.mini_container,
+.mini_slide_container {
+  box-sizing: border-box;
   height: 10vh;
   /* padding: 0vh 5vw; */
   width: 90vw;
@@ -7,10 +9,17 @@
   position: relative;
   overflow: hidden;
   transform: translateX(-50%);
+  transform-origin: left;
   transition: all 0.3s ease;
 }
+.mini_slide_container {
+  cursor: pointer;
+  user-select: none;
+  overflow: visible;
+  white-space: nowrap;
+  position: relative;
+}
 .mini_item {
-  width: 10%;
   height: 100%;
   opacity: 0.8;
   padding-right: 5px;

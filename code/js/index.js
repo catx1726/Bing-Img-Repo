@@ -11,7 +11,7 @@ let imgs = '',
   next = DOC.querySelector('.next'),
   downloadBtn = DOC.querySelector('.button-down'),
   downTrigger = DOC.querySelector('.trigger-down'),
-  miniContainer = DOC.querySelector('.mini_container'),
+  miniSlideContainer = DOC.querySelector('.mini_slide_container'),
   imgLen = 0, // imgs 总数量
   nowNum = 0, // 当前第几张
   imgClick = false,
@@ -59,8 +59,8 @@ function imgLoad() {
         attrName: ['src']
       }
       createDom(createDomSendObj, slideContainer, 'img-item')
-      createDom(createDomSendObj, miniContainer, 'mini_item')
-      miniItemClickReg(miniContainer)
+      createDom(createDomSendObj, miniSlideContainer, 'mini_item')
+      miniItemClickReg(miniSlideContainer)
       download(0)
     })
 }
@@ -101,12 +101,12 @@ function showDetail() {
   // 隐藏
   if (imgClick) {
     downTrigger.style.opacity = '0'
-    miniContainer.style.opacity = '0'
+    miniSlideContainer.style.opacity = '0'
     imgContainer.style.top = '5vh'
   } else {
     // 显示
     downTrigger.style.opacity = '1'
-    miniContainer.style.opacity = '1'
+    miniSlideContainer.style.opacity = '1'
     imgContainer.style.top = '0'
   }
 }
@@ -117,21 +117,26 @@ function download(idx) {
 }
 
 function nextImg() {
-  let check = nowNum < imgLen - 1 ? nowNum++ : false
-  if (!check) return false
-  pastNum = nowNum
+  nowNum = nowNum < imgLen - 1 ? nowNum + 1 : 0
   download(nowNum)
-  let temp = -100 * nowNum + 'vw'
-  slideContainer.style.transform = `translateX(${temp})`
+  slidTrigger()
 }
 
 function prevImg() {
-  let check = nowNum ? nowNum-- : false
-  if (!check) return false
-  pastNum = nowNum
+  nowNum = nowNum ? nowNum - 1 : imgLen - 1
   download(nowNum)
-  let temp = -100 * nowNum + 'vw'
+  slidTrigger()
+}
+
+function slidTrigger() {
+  console.log('slideTrigger numNum:', nowNum)
+  let temp = -100 * nowNum + 'vw',
+    miniTemp = -10 * nowNum - 30 + '%'
   slideContainer.style.transform = `translateX(${temp})`
+  miniSlideContainer.style.transform = `translateX(${miniTemp})`
+  if (nowNum < 3) {
+    miniSlideContainer.style.transform = `translateX(-50%)`
+  }
 }
 
 // mini_item 事件绑定
@@ -144,16 +149,15 @@ function miniItemClickReg(domContainer) {
   let miniItems = [...domContainer.children]
   miniItems.forEach((i) => {
     i.addEventListener('click', () => {
-      miniItemClick(i.src)
+      let idx = imgSrcList.indexOf(i.src)
+      miniItemClick(idx)
     })
   })
 }
 
 // click mini item 时获取到 IDX 赋值给 nowNum
 function miniItemClick(value) {
-  let idx = imgSrcList.indexOf(value)
-  nowNum = idx
-  console.log(nowNum)
-  prevImg() ? prevImg() : nextImg()
-  // console.log('nowNum :', nowNum, 'pastNum:', pastNum)
+  nowNum = value
+  nextImg()
+  prevImg()
 }
