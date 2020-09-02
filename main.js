@@ -86,7 +86,7 @@ getImg()
 const schedule = require('node-schedule')
 // const getImg = require('./main')
 
-// 每天早上 8:00 执行
+// 每天早上 8:00 执行，其实这里不用定时，因为我服务器设置了定时重启，届时也会重启pm2，然后运行相应命令进行下载
 const rule = new schedule.RecurrenceRule()
 rule.dayOfWeek = [0, new schedule.Range(1, 6)]
 rule.hour = 8
