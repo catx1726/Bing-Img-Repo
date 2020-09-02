@@ -40,7 +40,7 @@ let imgSrcList = []
 // 1. 获取到一周的图片
 function imgLoad() {
   let urlList = []
-  fetch(`https://dev.adoba.site/public/bing/${nowYear}/${nowMonth}/`)
+  fetch(`https://dev.adba.club/public/bing/${nowYear}/${nowMonth}/`)
     .then((res) => {
       // console.log('原始数据：', res)
       return res.json()
