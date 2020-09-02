@@ -22,7 +22,7 @@ let nowYear = _d.getFullYear(),
   nowMonth = _d.getMonth() + 1
 
 // 传递格式 https://test.dev.adoba.site/public/bing/2020/05/
-nowMonth = nowMonth < 9 ? '0' + nowMonth : nowMonth
+nowMonth = nowMonth <= 9 ? '0' + nowMonth : nowMonth
 
 // 存储当天图片的时间 如 20200509
 let imgDay = 0,
