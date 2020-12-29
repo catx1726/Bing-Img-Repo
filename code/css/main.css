@@ -1,6 +1,7 @@
 @import './media.css';
 @import './mini_imgs_slid.css';
 @import '../css/flex_layout.css';
+@import '../css/preloader.css';
 
 * {
   padding: 0;
@@ -17,6 +18,7 @@ a {
   color: #a49f9f;
   font-family: consolas;
   background-color: black;
+  transition: all 0.3s 1s ease;
 }
 .img_container,
 .slide_container {

@@ -1,4 +1,5 @@
 const DOC = document,
+  WINDOW = window,
   _d = new Date()
 
 let createDomSendObj = { classList: [], parentBox: {}, attrName: [], valueList: [], domType: [{}] }
@@ -15,7 +16,8 @@ let imgs = '',
   imgLen = 0, // imgs 总数量
   nowNum = 0, // 当前第几张
   imgClick = false,
-  pastNum = 0 // 存储之前那张的IDX
+  pastNum = 0, // 存储之前那张的IDX，
+  domLoaded = false // 当所有图片加载完毕之后，显示页面
 
 // 获取当前 year / month 用于请求使用
 let nowYear = _d.getFullYear(),
@@ -37,7 +39,7 @@ let fetchTemp = 'https://cn.bing.com/th?id=',
 // 标准 src 数组
 let imgSrcList = []
 
-// 1. 获取到一周的图片
+// 1. 获取到当月的图片
 function imgLoad() {
   let urlList = []
   fetch(`https://dev.adba.club/public/bing/${nowYear}/${nowMonth}/`)
@@ -62,9 +64,25 @@ function imgLoad() {
       createDom(createDomSendObj, miniSlideContainer, 'mini_item')
       miniItemClickReg(miniSlideContainer)
       download(0)
+      handleCheckImgsLoaded()
     })
 }
 imgLoad()
+
+function handleCheckImgsLoaded() {
+  let imgsPromiseAll = []
+  imgs.forEach((i, index) => {
+    imgsPromiseAll[index] = new Promise((resolve, reject) => {
+      i.onload = () => {
+        return resolve()
+      }
+    })
+  })
+  Promise.all(imgsPromiseAll).then(() => {
+    domLoaded = true
+    handlePreloader()
+  })
+}
 
 /**
  *
