@@ -7,7 +7,7 @@ let createDomSendObj = { classList: [], parentBox: {}, attrName: [], valueList: 
 // 基本交互的一些数据
 let imgs = '',
   imgContainer = DOC.querySelector('.img_container'),
-  slideContainer = DOC.querySelector('.slide_container'),
+  slideContainer = DOC.querySelector('.swiper-wrapper'),
   prev = DOC.querySelector('.prev'),
   next = DOC.querySelector('.next'),
   downloadBtn = DOC.querySelector('.button-down'),
@@ -60,11 +60,12 @@ function imgLoad() {
         valueList: imgSrcList,
         attrName: ['src']
       }
-      createDom(createDomSendObj, slideContainer, 'img-item')
+      createDom(createDomSendObj, slideContainer, 'img-item swiper-slide')
       createDom(createDomSendObj, miniSlideContainer, 'mini_item')
       miniItemClickReg(miniSlideContainer)
       download(0)
       handleCheckImgsLoaded()
+      handleSwiper()
     })
 }
 imgLoad()
@@ -109,9 +110,9 @@ function createDom(obj, parentBox, mClass) {
   imgLen = imgs.length
 }
 
-next.addEventListener('click', nextImg, false)
-prev.addEventListener('click', prevImg, false)
-slideContainer.addEventListener('click', showDetail, false)
+// next.addEventListener('click', nextImg, false)
+// prev.addEventListener('click', prevImg, false)
+slideContainer.addEventListener('dblclick', showDetail, false)
 
 // 单时隐藏 字体 和 trigger
 function showDetail() {
