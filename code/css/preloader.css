@@ -15,7 +15,7 @@
   box-sizing: border-box;
   transform-origin: center;
   border: 5px solid black;
-  animation: rotate 5s ease 1s infinite;
+  animation: rotate 6s ease infinite;
 }
 .square,
 .square::after {
@@ -31,23 +31,25 @@
   transform: scaleY(0);
   transform-origin: bottom center;
   background-color: black;
-  animation: fill 1s ease infinite;
+  animation: fill 6s ease infinite;
 }
 
 @keyframes fill {
-  0% {
+  25% {
     transform: translate(-50%, -50%) scaleY(0);
   }
-  40%,
-  100% {
+  50% {
     transform: translate(-50%, -50%) scaleY(1);
+  }
+  75% {
+    transform: translate(-50%, -50%) scaleY(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scaleY(0);
   }
 }
 
 @keyframes rotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
   25% {
     transform: translate(-50%, -50%) rotate(90deg);
   }
